@@ -21,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context);
+
     return Scaffold(
       key: _key,
       body: user.status == Status.Authenticating ? Loading():Stack(
@@ -98,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 52,
                       child: RaisedButton(
                         onPressed: ()async {
-                          if(!await user.signIn("minhhong0001@gmail.com","123456789"))
+                          if(!await user.signIn(_emailController.text,_passController.text))
                             _key.currentState.showSnackBar(SnackBar(content: Text("Sign in failed")));
                           else{
                             Navigator.push(

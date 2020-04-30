@@ -2,9 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:runningapp/provider/user_provider.dart';
-import 'package:runningapp/screens/home_page.dart';
 import 'package:runningapp/screens/login_page.dart';
-
 import 'package:runningapp/widgets/loading.dart';
 
 class RegisterPage extends StatefulWidget {

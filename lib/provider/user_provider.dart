@@ -32,7 +32,6 @@ class UserProvider with ChangeNotifier{
             .listen((data) =>
             data.documents.forEach((doc) {
               _userData = UserData.formSnapShot(doc);
-              print(_userData);
               notifyListeners();
             }));
       });
@@ -56,6 +55,7 @@ class UserProvider with ChangeNotifier{
           'email':email,
           'uid':user.user.uid,
           'phone':phone
+
         });
       });
       return true;
