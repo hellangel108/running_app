@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "871439232369",
+    "firebase_url": "https://runningapp-272413.firebaseio.com",
+    "project_id": "runningapp-272413",
+    "storage_bucket": "runningapp-272413.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:871439232369:android:8e6700f4eaf42f50709ad0",
+        "android_client_info": {
+          "package_name": "com.honghm.runningapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "871439232369-jnv01k4cb16kfe36sbggjjq6dlrqbje2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlSEiVpy1iUz6FTek-Gbk8amdAKjeGND4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "871439232369-jnv01k4cb16kfe36sbggjjq6dlrqbje2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
