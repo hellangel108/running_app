@@ -1,20 +1,20 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class User{
+class User {
   final String uid;
   User({this.uid});
 }
 
-class UserData{
-  static const ID = 'id';
+class UserData {
+  static const ID = 'uid';
   static const NAME = 'name';
   static const EMAIL = 'email';
   static const PHONE = 'phone';
   static const PASS = 'pass';
   static const HEIGHT = 'height';
   static const WEIGHT = 'weight';
-
+  static const URL_AVT = 'url_avt';
+  static const URL_COVER = 'url_cover';
   String _id;
   String _name;
   String _email;
@@ -22,6 +22,20 @@ class UserData{
   String _pass;
   String _weight;
   String _height;
+  String _urlAvt;
+  String _urlCover;
+
+  String get urlCover => _urlCover;
+
+  set urlCover(String value) {
+    _urlCover = value;
+  }
+
+  String get urlAvt => _urlAvt;
+
+  set urlAvt(String value) {
+    _urlAvt = value;
+  }
 
   String get weight => _weight;
 
@@ -45,13 +59,16 @@ class UserData{
 
   String get height => _height;
 
-  UserData.formSnapShot(DocumentSnapshot snapshot){
+  UserData.formSnapShot(DocumentSnapshot snapshot) {
     Map data = snapshot.data;
+    _id = data[ID];
     _name = data[NAME];
     _email = data[EMAIL];
     _phone = data[PHONE];
     _weight = data[WEIGHT];
     _height = data[HEIGHT];
+    _urlAvt = data[URL_AVT];
+    _urlCover = data[URL_COVER];
   }
 
   set email(String value) {
@@ -66,11 +83,7 @@ class UserData{
     _pass = value;
   }
 
-
-
   set height(String value) {
     _height = value;
   }
-
-
 }

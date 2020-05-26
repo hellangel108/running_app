@@ -16,14 +16,26 @@ class _IntroPageState extends State<IntroPage> {
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            child: Image.asset("assets/images/background.jpg",fit: BoxFit.fill,),
+            child: Image.asset(
+              "assets/images/background.jpg",
+              fit: BoxFit.fill,
+            ),
           ),
           Container(
             alignment: Alignment.center,
-            color: Colors.white.withOpacity(0.4),
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.black.withOpacity(0.8),
+                    Colors.blue,
+                    Colors.orange.withOpacity(0.8)
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                )
+            ),
             padding: EdgeInsets.fromLTRB(30, 200, 30, 0),
             child: ListView(
-
               children: <Widget>[
                 Container(
                   height: 80.0,
@@ -31,7 +43,10 @@ class _IntroPageState extends State<IntroPage> {
                   child: new CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 100.0,
-                    child: Image.asset("assets/images/icon.png",fit: BoxFit.fill,),
+                    child: Image.asset(
+                      "assets/images/icon.png",
+                      fit: BoxFit.fill,
+                    ),
                   ),
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -41,24 +56,61 @@ class _IntroPageState extends State<IntroPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
-                  child: Center(child: Text("RUN APP", style: TextStyle(fontSize: 30, color: Colors.black, fontWeight: FontWeight.bold, inherit: false),)),
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  child: Center(
+                      child: Text(
+                    "RUN APP",
+                    style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        inherit: false),
+                  )),
                 ),
-
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
+                  child: Center(
+                      child: Text(
+                        "Phầm mềm hỗ trợ chạy bộ",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            inherit: false),
+                      )),
+                ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 52,
-                  child: RaisedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
-                    },
-                    child: Text(
-                      "Log In",
-                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.black54,
+                            Colors.blue,
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      borderRadius:  BorderRadius.all(Radius.circular(20)),
+                        border: Border.all(color: Colors.orange,width: 2)
                     ),
-                    color: Colors.red,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: RaisedButton(
+                      color: Colors.black26,
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => LoginPage()));
+                      },
+                      child: Text(
+                        "Đăng nhập",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                    ),
                   ),
                 ),
                 Padding(
@@ -66,17 +118,37 @@ class _IntroPageState extends State<IntroPage> {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 52,
-                    child: RaisedButton(
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
-                      },
-                      child: Text(
-                        "Register",
-                        style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.black54,
+                            Colors.blue,
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius:  BorderRadius.all(Radius.circular(20)),
+                        border: Border.all(color: Colors.red, width: 2)
                       ),
-                      color: Colors.red,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: RaisedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterPage()));
+                        },
+                        child: Text(
+                          "Đăng ký",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        color: Colors.black26,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(20))),
+                      ),
                     ),
                   ),
                 ),
