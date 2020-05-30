@@ -13,6 +13,8 @@ class _IntroPageState extends State<IntroPage> {
     return Center(
       child: Stack(
         children: <Widget>[
+
+          //------------Background Image----------------
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -21,6 +23,7 @@ class _IntroPageState extends State<IntroPage> {
               fit: BoxFit.fill,
             ),
           ),
+
           Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -37,6 +40,8 @@ class _IntroPageState extends State<IntroPage> {
             padding: EdgeInsets.fromLTRB(30, 200, 30, 0),
             child: ListView(
               children: <Widget>[
+
+                //------------Logo------------------
                 Container(
                   height: 80.0,
                   width: 80.0,
@@ -55,6 +60,8 @@ class _IntroPageState extends State<IntroPage> {
                     shape: BoxShape.circle,
                   ),
                 ),
+
+                //-----------Name App----------------
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                   child: Center(
@@ -67,6 +74,7 @@ class _IntroPageState extends State<IntroPage> {
                         inherit: false),
                   )),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
                   child: Center(
@@ -79,6 +87,8 @@ class _IntroPageState extends State<IntroPage> {
                             inherit: false),
                       )),
                 ),
+
+                //------------Button Đăng nhập-------------
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 52,
@@ -113,6 +123,8 @@ class _IntroPageState extends State<IntroPage> {
                     ),
                   ),
                 ),
+
+                //------------Button Đăng ký----------------
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: SizedBox(

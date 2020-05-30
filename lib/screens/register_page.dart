@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:runningapp/config/initialization.dart';
 import 'package:runningapp/provider/user_provider.dart';
-import 'package:runningapp/screens/login_page.dart';
+import 'package:runningapp/screens/register_page2.dart';
 import 'package:runningapp/widgets/loading.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -15,11 +16,9 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _passController = new TextEditingController();
   TextEditingController _phoneController = new TextEditingController();
+  TextEditingController _rePassController = new TextEditingController();
 
   final _key = GlobalKey<ScaffoldState>();
-
-  //final AuthService _auth = AuthService();
-
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context);
@@ -78,6 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   shape: BoxShape.circle,
                                 ),
                               ),
+
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                                 child: Text(
@@ -131,7 +131,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                                 child: TextField(
-                                  controller: _passController,
+                                  controller: _rePassController,
                                   style: TextStyle(fontSize: 18, color: Colors.black),
                                   obscureText: true,
                                   decoration: InputDecoration(
@@ -187,19 +187,19 @@ class _RegisterPageState extends State<RegisterPage> {
                                   height: 52,
                                   child: RaisedButton(
                                     onPressed: () async {
-                                      if (!await user.signUp(
-                                          _nameController.text,
-                                          _emailController.text,
-                                          _passController.text,
-                                          _phoneController.text)) {
-                                        _key.currentState.showSnackBar(SnackBar(
-                                            content: Text("Đăng ý thất bại")));
-                                        return;
-                                      }
-                                      changeScreenReplacement(context, LoginPage());
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  RegiterPage2(_nameController.text,
+                                                              _emailController.text,
+                                                              _passController.text,
+                                                              _phoneController.text)
+                                              )
+                                      );
                                     },
                                     child: Text(
-                                      "Đăng ký",
+                                      "Tiếp tục",
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 18),
                                     ),
@@ -210,6 +210,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                 ),
                               ),
+
+                              //------------Điều hướng sang màn hình đăng nhập-------------------
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                                 child: RichText(
@@ -240,8 +242,5 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void changeScreenReplacement(BuildContext context, Widget widget) {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => widget));
-  }
+
 }

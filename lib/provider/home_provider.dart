@@ -6,13 +6,15 @@ import 'package:location/location.dart';
 import 'package:flutter/services.dart';
 import 'package:pedometer/pedometer.dart';
 
+
 class HomeProvider with ChangeNotifier {
-  //Map Provider
+
   Location _locationTracker = Location();
   LocationData _locationData;
   GoogleMapController _controller;
   set controller(GoogleMapController value) {
     _controller = value;
+    notifyListeners();
   }
 
   List<LatLng> latlngs = []; //mảng lưu vị trí
@@ -35,10 +37,12 @@ class HomeProvider with ChangeNotifier {
     _height = value;
   }
 
+  double get height => _height;
   double _caloriesBurned = 0;
   double get caloriesBurned => _caloriesBurned;
 
-  // Map Provider
+  //-------------------- Map Provider-----------------------
+  //-------------Cập nhật lại Map khi có sự thay đổi vị trí -----------------
   void updateMap(LocationData newLocalData, BuildContext context) async {
     LatLng latlng = LatLng(newLocalData.latitude, newLocalData.longitude);
 
@@ -66,7 +70,7 @@ class HomeProvider with ChangeNotifier {
     }
   }
 
-  //Lấy vị trí hiện tại của thiết bị
+  //----------Lấy vị trí hiện tại của thiết bị---------------
   void getCurrentLocation({BuildContext context, int Case}) async {
     if (context != null) {
       _context = context;
@@ -103,6 +107,7 @@ class HomeProvider with ChangeNotifier {
   // Step Provider
   double get distance => _distance;
 
+  //-----------Tạo sự kiện lắng nghe bước chân-----------------
   void startListeningStep() {
     _pedometer = new Pedometer();
     _subscription = _pedometer.pedometerStream.listen(_onData,
@@ -139,10 +144,10 @@ class HomeProvider with ChangeNotifier {
     _distance = 0;
     notifyListeners();
   }
-
   void _onDone() {}
   void _onError(error) => print("Flutter Pedometer Error: $error");
 
+  //-------------Tính quãng đường---------------------
   void _countDistance(int step) {
     double stride = _height * 0.43;
     _distance = (step * stride) / 1000;
@@ -151,6 +156,8 @@ class HomeProvider with ChangeNotifier {
     _countCalories(_distance);
   }
 
+
+  //--------------Tính lượng kalo được đốt cháy-------------------
   void _countCalories(double distance) {
     _caloriesBurned = 0.5 * (_weight * 2.20462) * 1.60934 * distance;
     _caloriesBurned = num.parse(_caloriesBurned.toStringAsFixed(4));
@@ -159,5 +166,63 @@ class HomeProvider with ChangeNotifier {
 
   set weight(double value) {
     _weight = value;
+  }
+
+  int _stepTarget = 1000;
+  double _distanceTarget = 1;
+  int _timeTarget = 30;
+  double _caloriesTarget = 300;
+
+
+  int get stepTarget => _stepTarget;
+
+  set stepTarget(int value) {
+    _stepTarget = value;
+    notifyListeners();
+
+  }
+void followStep(int step){
+  double stride = _height * 0.43;
+  _distanceTarget = (step * stride) / 1000;
+  _distanceTarget = num.parse(_distanceTarget.toStringAsFixed(4));
+  notifyListeners();
+  _caloriesTarget = 0.5 * (_weight * 2.20462) * 1.60934 * _distanceTarget;
+  _caloriesTarget = num.parse(_caloriesTarget.toStringAsFixed(4));
+  notifyListeners();
+}
+  double get distanceTarget => _distanceTarget;
+
+  set distanceTarget(double value) {
+    _distanceTarget = value;
+    notifyListeners();
+  }
+  void folowDistance(double distances){
+    double stride = _height * 0.43;
+    _stepTarget = ((1000*distances)/stride).round();
+    notifyListeners();
+    _caloriesTarget = 0.5 * (_weight * 2.20462) * 1.60934 * distances;
+    _caloriesTarget = num.parse(_caloriesTarget.toStringAsFixed(4));
+    notifyListeners();
+  }
+  int get timeTarget => _timeTarget;
+
+  set timeTarget(int value) {
+    _timeTarget = value;
+    notifyListeners();
+  }
+
+  double get caloriesTarget => _caloriesTarget;
+
+  set caloriesTarget(double value) {
+    _caloriesTarget = value;
+    notifyListeners();
+  }
+  void folowCalories(double calories){
+    double stride = _height * 0.43;
+    _distanceTarget = calories/(0.5 * (_weight * 2.20462) * 1.60934);
+    _distanceTarget = num.parse(_distanceTarget.toStringAsFixed(4));
+    notifyListeners();
+    _stepTarget = ((1000*_distanceTarget)/stride).round();
+    notifyListeners();
   }
 }

@@ -1,14 +1,13 @@
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
+import 'package:runningapp/config/initialization.dart';
 import 'package:runningapp/models/user.dart';
 
-enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
+
+
 
 class UserProvider with ChangeNotifier {
   FirebaseAuth _auth;
@@ -45,7 +44,7 @@ class UserProvider with ChangeNotifier {
     } catch (e) {
       _status = Status.Unauthenticated;
       notifyListeners();
-      print(e.toString());
+      //print(e.toString());
       return false;
     }
   }
@@ -69,7 +68,7 @@ class UserProvider with ChangeNotifier {
     } catch (e) {
       _status = Status.Unauthenticated;
       notifyListeners();
-      print(e.toString());
+      //print(e.toString());
       return false;
     }
   }

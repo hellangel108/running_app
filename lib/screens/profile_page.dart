@@ -14,6 +14,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
   final _key = GlobalKey<ScaffoldState>();
   String avtUrl;
   String coverUrl;
@@ -48,6 +49,8 @@ class _ProfilePageState extends State<ProfilePage> {
         _imageCover = image;
       });
     }
+
+    //----------Cập nhật avatar---------------
     Future uploadAvt(BuildContext context) async{
       String fileName = basename(_imageAvt.path);
       StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
@@ -60,6 +63,7 @@ class _ProfilePageState extends State<ProfilePage> {
         _imageAvt = null;
         });
     }
+    //----------Cập nhật cover--------------
     Future uploadCover(BuildContext context) async{
       String fileName = basename(_imageCover.path);
       StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
@@ -72,6 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
         _imageCover = null;
       });
     }
+
     return Scaffold(
         key: _key,
         body: Container(

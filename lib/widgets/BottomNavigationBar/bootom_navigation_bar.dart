@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import 'package:runningapp/provider/timer_provider.dart';
 import 'bottom_curved_Painter.dart';
 
 
@@ -15,7 +16,6 @@ class CustomBottomNavigationBar extends StatefulWidget {
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar>
     with TickerProviderStateMixin {
   int _selectedIndex = 1;
-
   AnimationController _xController;
   AnimationController _yController;
   @override
@@ -60,12 +60,15 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar>
     super.dispose();
   }
 
-  Widget _icon(IconData icon, bool isEnable, int index) {
+  Widget _icon(IconData icon, bool isEnable, int index, BuildContext context) {
+    final time = Provider.of<TimerProvider>(context);
     return Expanded(
       child: InkWell(
         borderRadius: BorderRadius.all(Radius.circular(50)),
         onTap: () {
           _handlePressed(index);
+          if(index==1)
+            time.startTimeLoading();
         },
         child: AnimatedContainer(
           duration: Duration(milliseconds: 500),
@@ -175,14 +178,14 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                _icon(Icons.description, _selectedIndex == 0, 0),
-                _icon(Icons.home, _selectedIndex == 1, 1),
-                _icon(Icons.settings, _selectedIndex == 2, 2),
+                _icon(Icons.description, _selectedIndex == 0, 0, context),
+                _icon(Icons.home, _selectedIndex == 1, 1,context),
+                _icon(Icons.settings, _selectedIndex == 2, 2,context),
               ],
             ),
           ),
         ],
       ),
     );
-  }
+}
 }

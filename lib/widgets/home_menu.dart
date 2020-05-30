@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:runningapp/models/user.dart';
 import 'package:runningapp/provider/user_provider.dart';
-import 'package:runningapp/screens/intro_page.dart';
-import 'package:runningapp/screens/profile_page.dart';
-
 class HomeMenu extends StatefulWidget {
   @override
   _HomeMenuState createState() => _HomeMenuState();

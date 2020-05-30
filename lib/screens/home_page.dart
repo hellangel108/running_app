@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:runningapp/config/initialization.dart';
 import 'package:runningapp/provider/home_provider.dart';
 import 'package:runningapp/provider/timer_provider.dart';
 import 'package:runningapp/provider/user_provider.dart';
-import 'package:runningapp/widgets/BottomNavigationBar/bootom_navigation_bar.dart';
 import 'package:runningapp/widgets/chart_view.dart';
 
 import 'package:runningapp/widgets/count_view.dart';
 
 import 'package:runningapp/widgets/google_map.dart';
-import 'package:runningapp/widgets/home_menu.dart';
+import 'package:runningapp/widgets/loading.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -28,16 +28,10 @@ class _HomePageState extends State<HomePage> {
     final home = Provider.of<HomeProvider>(context);
     final user = Provider.of<UserProvider>(context);
 
-
-
-    initState() {
-      home.height = double.parse(user.userData.height);
-      home.weight = double.parse(user.userData.weight);
-    }
-
     return Column(
       children: <Widget>[
-        MapView(),
+        //---------------Map View------------------------
+        (time.statusLoading == Status.Authenticating) ? Container(height: 350,child: Loading()) : MapView(),
 
         Container(
           decoration: BoxDecoration(
@@ -52,12 +46,15 @@ class _HomePageState extends State<HomePage> {
               )),
           child: Column(
             children: <Widget>[
+              //----------Button điều khiển------------------
               Container(
                 height: 60,
                 padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+
+                    //-------------Button Pause-------------
                     Container(
                       height: 50,
                       width: 50,
@@ -85,6 +82,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
+
+                    //------------Button Start-----------------
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: Container(
@@ -116,6 +115,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
+
+                    //--------------Button Stop-----------------
                     Container(
                       height: 50,
                       width: 50,
@@ -144,38 +145,12 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
+              //-----------Count View-----------------------
               Container(child: CountView()),
-//              Padding(
-//                //thêm vô cho đẹp chưa xử lý
-//                padding: EdgeInsets.all(10),
-//                child: ChartView(),
-//              )
             ],
           ),
         ),
-
       ],
     );
-
-
   }
-  void onBottomIconPressed(int index) {
-    switch(index){
-      case 0:
-        setState(() {
-          isHomePageSelected = false;
-          isProfilePageSelected = true;
-        });
-        break;
-      case 1:
-        setState(() {
-          isHomePageSelected = true;
-          isProfilePageSelected = false;
-        });
-        break;
-      case 2:
-        break;
-    }
-  }
-
 }

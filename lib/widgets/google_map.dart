@@ -18,36 +18,30 @@ class _MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
     final home = Provider.of<HomeProvider>(context);
-
     return Container(
-        child: Column(
-      children: <Widget>[
-        Container(
-          height: 350,
-          child: Stack(
-            children: <Widget>[
-              GoogleMap(
-                myLocationEnabled: false,
-                mapType: MapType.normal,
-                polylines: home.polylines,
-                initialCameraPosition: initialLocation,
-                markers: Set.of((home.marker != null) ? [home.marker] : []),
-                onMapCreated: (GoogleMapController controller) {
-                  home.controller = controller;
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(300, 260, 10, 0),
-                child: FloatingActionButton(
-                    child: Icon(Icons.location_searching),
-                    onPressed: () {
-                      home.getCurrentLocation(context: context, Case: 2);
-                    }),
-              ),
-            ],
+      height: 350,
+      child: Stack(
+        children: <Widget>[
+          GoogleMap(
+            myLocationEnabled: false,
+            mapType: MapType.normal,
+            polylines: home.polylines,
+            initialCameraPosition: initialLocation,
+            markers: Set.of((home.marker != null) ? [home.marker] : []),
+            onMapCreated: (GoogleMapController controller) {
+              home.controller = controller;
+            },
           ),
-        ),
-      ],
-    ));
+          Padding(
+            padding: const EdgeInsets.fromLTRB(300, 260, 10, 0),
+            child: FloatingActionButton(
+                child: Icon(Icons.location_searching),
+                onPressed: () {
+                  home.getCurrentLocation(context: context, Case: 2);
+                }),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -10,6 +10,7 @@ class CountView extends StatefulWidget {
 
 class _CountViewState extends State<CountView> {
 
+
   @override
   Widget build(BuildContext context) {
     final time = Provider.of<TimerProvider>(context);
@@ -71,7 +72,7 @@ class _CountViewState extends State<CountView> {
                       width: 35,
                       height: 35,
                       child: Image.asset('assets/images/distance.png',fit: BoxFit.fill,)),
-                  title: Text(home.distance.toString(), style: TextStyle(color: Colors.white, fontSize: 18),),
+                  title: Text(home.distance.toString() + " km", style: TextStyle(color: Colors.white, fontSize: 18),),
                   subtitle: Text("Q.đường",style: TextStyle(color: Colors.grey, fontSize: 13,fontWeight: FontWeight.bold)),
                 ),
               ),

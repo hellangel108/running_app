@@ -1,12 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:runningapp/config/initialization.dart';
+import 'package:runningapp/provider/home_provider.dart';
 import 'package:runningapp/provider/user_provider.dart';
-import 'package:runningapp/screens/main_page.dart';
+
 
 import 'package:runningapp/widgets/loading.dart';
-
-import 'home_page.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context);
-
+    final home = Provider.of<HomeProvider>(context);
     return Scaffold(
       key: _key,
       body: user.status == Status.Authenticating
@@ -62,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(
                             height: 120,
                           ),
+                          //------------Logo--------------
                           Container(
                             height: 80.0,
                             width: 80.0,
@@ -80,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                               shape: BoxShape.circle,
                             ),
                           ),
-                          //Image.asset('ic_car_green.png'),
+
                           Padding(
                             padding: const EdgeInsets.fromLTRB(0, 30, 0, 6),
                             child: Text(
@@ -94,6 +95,8 @@ class _LoginPageState extends State<LoginPage> {
                             style:
                                 TextStyle(fontSize: 16, color: Colors.white),
                           ),
+
+                          //-----------------Email------------------
                           Padding(
                             padding: const EdgeInsets.fromLTRB(0, 100, 0, 20),
                             child: TextField(
@@ -113,6 +116,8 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                           ),
+
+                          //-----------------Password-----------------
                           TextField(
                             controller: _passController,
                             style: TextStyle(fontSize: 18, color: Colors.black),
@@ -127,6 +132,8 @@ class _LoginPageState extends State<LoginPage> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(6)))),
                           ),
+
+                          //---------------Quên mật khẩu----------------
                           Container(
                             constraints:
                                 BoxConstraints.loose(Size(double.infinity, 40)),
@@ -140,6 +147,8 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                           ),
+
+                          //---------------Button đăng nhập-------------
                           Padding(
                             padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
                             child: SizedBox(
@@ -147,12 +156,18 @@ class _LoginPageState extends State<LoginPage> {
                               height: 52,
                               child: RaisedButton(
                                 onPressed: () async {
-                                  if (!await user.signIn('minhhong0001@gmail.com',
-                                      '123456789'))
+                                  if (await user.signIn('minhhong0001@gmail.com',
+                                      '123456789')){
+                                    try{
+                                      home.height = double.parse(user.userData.height);
+                                      home.weight = double.parse(user.userData.weight);
+                                      print(home.height);
+                                    }catch(e){}
+                                      Navigator.pushNamed(context, '/main');
+                                    }
+                                  else {
                                     _key.currentState.showSnackBar(SnackBar(
                                         content: Text("Đăng nhập không thành công")));
-                                  else {
-                                   Navigator.pushNamed(context, '/main');
                                   }
                                 },
                                 child: Text(
@@ -167,6 +182,8 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                           ),
+
+                          //---------------Đăng ký tài khoản mới---------------
                           Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                             child: RichText(

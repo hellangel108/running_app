@@ -4,7 +4,6 @@ import 'package:runningapp/screens/setting_page.dart';
 import 'package:runningapp/screens/target_page.dart';
 import 'package:runningapp/widgets/BottomNavigationBar/bootom_navigation_bar.dart';
 import 'package:runningapp/widgets/home_menu.dart';
-
 class MainPage extends StatefulWidget {
   @override
   _MainPageState createState() => _MainPageState();
@@ -32,10 +31,13 @@ class _MainPageState extends State<MainPage> {
               )),
           child: Stack(
             children: <Widget>[
+              //------------Điều hướng màn hình-----------------
               Padding(
                 padding: const EdgeInsets.only(top: 80),
                 child: isHomePageSelected ? HomePage() : (isTargetPageSelected ? TargetPage() : SettingPage()),
               ),
+
+              //-----App Bar----------------------
               Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -76,12 +78,13 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       ),
+      //-----------------Bottom Bar--------------------
       bottomNavigationBar: CustomBottomNavigationBar(onIconPresedCallback: onBottomIconPressed),
+      //----------------Drawer View--------------------
       drawer: HomeMenu(),
     );
-
-
   }
+
   void onBottomIconPressed(int index) {
     switch(index){
       case 0:
